@@ -1,0 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root{
+    --panera_green:#686F12;
+    --panera_yellow:#ECD283;
+    --panera_brown: #300900;
+    --panera_white:#fff;
+}
+.Panera_navbar_bg {
+    background-color: var(--panera_yellow);
+    opacity:1;
+}
+.Panera_navbar_brand {
+    font-size:20px;
+    font-weight:900;
+    color: var(--panera_white);
+    opacity:0.9;
+    font-family:'Roboto';
+}
+
+.Panera_navbar_toggle {
+    background-color: var(--panera_white);
+    opacity: 1;
+    border:none;
+}
+
+.Panera_navbar_toggle:focus {
+    box-shadow: none;
+    outline:none;
+}
+
+.Panera_navbar_offcanvas {
+    background-color:var(--panera_green)
+}
+
+.Panera_navbar_offcanvas_header {
+    font-family: Roboto;
+    font-weight:600;
+    font-size:1.2rem;
+    line-height: 1.75rem;
+    text-align: center;
+    background-color: var(--panera_yellow);
+}
+
+.Panera_navbar_offcanvas_body {
+    justify-content:center;
+    padding-right:0rem!important;
+}
+.Panera_navbar_offcanvas_body_nav {
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+    margin-top:0.5rem;
+    margin-bottom:0.5rem;
+    font-family:Roboto;
+    font-weight:400;
+    font-size:1rem;
+    line-height:1.5rem;
+    text-align:center;
+    color:var(--panera_yellow);
+    text-transform: uppercase;
+    border-radius:0.5rem;
+}
+
+.Panera_navbar_offcanvas_body_active {
+    background-color:var(--panera_yellow);
+    color:var(--panera_green);
+    transition: background-color 2s linear 0.01;
+}
+
+.Panera_navbar_offcanvas_body_nav:hover {
+    background-color:var(--panera_yellow);
+    color:var(--panera_green);
+    opacity:0.8;
+    transition: background-color 2s linear 0.05;
+}
