@@ -1,8 +1,8 @@
 const imageMetaData = {
     'Panera':{
         url:'./images/Panera.svg',
-        height:35,
-        width:120
+        height:45,
+        width:140
     }
 }
 
