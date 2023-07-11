@@ -62,7 +62,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                 </Row>
                 <Row
@@ -89,7 +89,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                   <Col
                     md={4}
@@ -110,7 +110,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                 </Row>
                 <Row
@@ -137,7 +137,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                   <Col
                     md={4}
@@ -158,7 +158,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                 </Row>
                 <Row
@@ -292,7 +292,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                 </Row>
                 <Row
@@ -319,7 +319,7 @@ function InventoryForm() {
                       className={`${
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
-                    ></Form.Control>
+                    disabled></Form.Control>
                   </Col>
                 </Row>
                 <Row
@@ -550,7 +550,7 @@ function InventoryForm() {
                   className={`${
                     styles[`${shop}_detailed_view_inventory_form_input`]
                   }`}
-                ></Form.Control>
+                disabled></Form.Control>
               </Col>
             </Row>
             <Row style={{ paddingTop: 10 }}>
