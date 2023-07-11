@@ -3,6 +3,7 @@ import DetailedView from './Components/Detailed_View/DetailedView'
 import TableView from './Components/Table_View/TableView'
 import VisualizationView from './Components/Visualization_View/VisualizationView'
 import Dashboard from './Dashboard';
+
 function App() {
   return (
     <Router>
