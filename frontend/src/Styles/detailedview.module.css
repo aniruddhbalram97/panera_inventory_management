@@ -1,0 +1,194 @@
+:root{
+    --panera_green:rgb(104, 111, 18);
+    --panera_dark_green:rgb(87, 108, 29);
+    --panera_yellow:rgb(236, 210, 131);
+    --panera_brown: rgb(48, 9, 0);
+    --panera_white:#fff;
+    --panera_light_green: rgb(224, 235, 96);
+    --panera_black:#000;
+}
+.Panera_detailed_view_container {
+    height:calc(100vh - 71px);
+    width:100%;
+}
+
+/*Page Title*/
+.Panera_detailed_view_date_container {
+    display:flex;
+    justify-content: left;
+    align-items: center;
+}
+.Panera_detailed_view_title {
+    padding:10px;
+    background:var(--panera_dark_green);
+    font-family:Roboto;
+    font-weight:900;
+    font-size:1.4rem;
+    text-align: left;
+    text-transform: uppercase;
+    color:var(--panera_yellow);
+}
+/* Card Group */
+.Panera_detailed_view_card_group_container {
+    box-shadow: 5px 5px 20px -4px var(--panera_dark_green);
+    height:calc(100vh - 71px - 53.6px);;
+    overflow-y: auto;
+}
+.Panera_detailed_view_card_group_container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.Panera_detailed_view_card_group_container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    border-radius:1px;
+}
+
+.Panera_detailed_view_card_group_container::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: var(--panera_yellow);
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5);
+}
+/* Card */
+.Panera_detailed_view_card {
+    margin-top:1rem;
+    border-radius: 0.5rem;
+    max-width: 500px;
+    box-shadow: 5px 5px 10px -4px var(--panera_dark_green);
+    cursor:pointer;
+    height:100%;
+}
+
+.Panera_detailed_view_card_content_container {
+    background-color: var(--panera_dark_green);
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    
+}
+.Panera_detailed_view_card_image {
+    max-width:100px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    padding:0.5rem;
+    border-right:1px var(--panera_dark_green) solid;
+}
+
+.Panera_detailed_view_card_content {
+    display:flex;
+    align-items: center;
+    padding:0.5rem;
+    text-align: right;
+}
+.Panera_detailed_view_card_content_header {
+    font-family:Roboto;
+    font-weight:900;
+    font-size:1.1rem;
+    line-height:1.6rem;
+    text-align:right;
+    margin-right:0.3rem;
+    text-transform:uppercase;
+    color:var(--panera_yellow);
+}
+
+
+.Panera_detailed_view_card_content_body {
+    font-family:Roboto;
+    font-weight:600;
+    font-size: 0.8rem;
+    line-height:0.9rem;
+    text-align: right;
+    margin-right:0.3rem;
+    padding-top:1px!important;
+    padding-bottom:1px!important;
+    margin-bottom:0.2rem;
+    text-transform: capitalize;
+    color:var(--panera_white);
+}
+
+/*Inventory Form*/
+.Panera_detailed_view_inventory_form_container {
+    height:calc(100vh - 71px - 53.6px);
+    overflow: auto;
+}
+
+.Panera_detailed_view_inventory_form_container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.Panera_detailed_view_inventory_form_container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1); 
+    border-radius:1px;
+}
+
+.Panera_detailed_view_inventory_form_container::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: var(--panera_yellow);
+    -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0.5);
+}
+
+.Panera_detailed_view_inventory_form_title {
+    background-color: var(--panera_yellow);
+    padding:3px;
+    font-family:Roboto;
+    font-size:1rem;
+    font-weight:900;
+    line-height:1.2rem;
+    margin-top:15px;
+    border-radius:5px;
+    text-align:center;
+    color:var(--panera_dark_green);
+}
+
+.Panera_detailed_view_inventory_form_image {
+    background-color: rgba(87, 108, 29, 0.8);
+}
+
+.Panera_detailed_view_inventory_form_row {
+    padding-top:10px;
+    padding-left:10px;
+}
+
+.Panera_detailed_view_inventory_form_label {
+    background-color: var(--panera_dark_green);
+    color:var(--panera_white);
+    font-size:0.9rem;
+    padding-bottom:2px;
+    padding-top:2px;
+    font-family:Roboto;
+    font-weight:600;
+    text-align: left;
+    border-radius:5px 0px 0px 5px; 
+    display:flex;
+    align-items: center;  
+}
+
+.Panera_detailed_view_inventory_form_input_col {
+    padding-right: 0px;
+    padding-left:0px;
+    margin:0;
+}
+.Panera_detailed_view_inventory_form_input {
+    padding:2px 0px 2px 5px;
+    font-weight:600;
+    font-family:Roboto;
+    font-size:0.9rem;
+    color:var(--panera_dark_green);
+    height:100%;
+    margin:0;
+    caret-color: var(--panera_dark_green);
+    background-color: var(--panera_yellow);
+    border-radius:0px 5px 5px 0px; 
+}
+.Panera_detailed_view_inventory_form_input:focus {
+    outline: none;
+    border:1px var(--panera_dark_green) solid;
+    background-color: rgba(236, 210, 131,0.6);
+    color:var(--panera_dark_green);
+
+    box-shadow:none;
+}
+.Panera_detailed_view_inventory_form_horizontal_line {
+    height:5px;
+    background-color:var(--panera_dark_green);
+
+}
