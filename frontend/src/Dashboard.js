@@ -3,7 +3,7 @@ import Sidebar from "./Components/Offcanvas";
 function Dashboard() {
   return (
     <>
-      <Sidebar />
+      DASHBOARD
     </>
   );
 }

@@ -407,3 +407,9 @@ const inventory_data =
     }
 ]
 export {inventory_data};
+
+
+/*
+LB, GAL, OZ : Lock BAG, TRAY, EA, SLEEVES
+and the other way round
+*/

@@ -65,7 +65,8 @@
 }
 
 .Panera_navbar_offcanvas_body_active {
-    color:var(--panera_black);
+    /* color:var(--panera_black); */
+    text-decoration: underline;
 }
 .Panera_navbar_offcanvas_body_nav:active {
     color:var(--panera_black);

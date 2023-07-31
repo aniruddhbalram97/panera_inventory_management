@@ -1,18 +1,25 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import {useSelector, useDispatch} from 'react-redux';
-import { changeDetailedTab, changeTableTab, changeVisualizationTab } from '../app/uiReducer';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  changeDetailedTab,
+  changeTableTab,
+  changeVisualizationTab,
+} from "../app/uiReducer";
+import { clearSelectedData } from "../app/dataReducer";
 import { imageMetaData } from "./constants";
 import styles from "./../Styles/offcanvas.module.css";
 
 function Sidebar() {
   const shop = "Panera"; // should come as a prop
-  const detailedTab = useSelector((state)=>state.uiReducer.detailedTab);
-  const tableTab = useSelector((state)=>state.uiReducer.tableTab);
-  const visualizationTab = useSelector((state)=>state.uiReducer.visualizationTab) 
+  const detailedTab = useSelector((state) => state.uiReducer.detailedTab);
+  const tableTab = useSelector((state) => state.uiReducer.tableTab);
+  const visualizationTab = useSelector(
+    (state) => state.uiReducer.visualizationTab
+  );
   const dispatch = useDispatch();
 
   return (
@@ -56,23 +63,59 @@ function Sidebar() {
                 ></img>
               </Navbar.Brand>
             </Offcanvas.Header>
-            <Offcanvas.Body >
-              <Nav className={`flex-grow-1 pe-3 ${styles[`${shop}_navbar_offcanvas_body`]}`}>
-                <Nav.Link onClick={()=> {dispatch(changeDetailedTab())}} className={`${detailedTab?styles[`${shop}_navbar_offcanvas_body_active`]:''} ${styles[`${shop}_navbar_offcanvas_body_nav`]}`}>
-                  <Link className="nav-link" to={'/dashboard/detailed_view'}>
-                    Detailed
+            <Offcanvas.Body>
+              <Nav
+                className={`flex-grow-1 pe-3 ${
+                  styles[`${shop}_navbar_offcanvas_body`]
+                }`}
+              >
+                <Nav.Link
+                  onClick={() => {
+                    dispatch(changeDetailedTab());
+                  }}
+                  to={"/dashboard/detailed_view"}
+                  className={`${
+                    detailedTab
+                      ? styles[`${shop}_navbar_offcanvas_body_active`]
+                      : ""
+                  } ${styles[`${shop}_navbar_offcanvas_body_nav`]}`}
+                >
+                  <Link className="nav-link" to={"/dashboard/detailed_view"}>
+                    Data Entry
                   </Link>
                 </Nav.Link>
-                <Nav.Link onClick={()=>{dispatch(changeTableTab())}} className={`${tableTab?styles[`${shop}_navbar_offcanvas_body_active`]:''} ${styles[`${shop}_navbar_offcanvas_body_nav`]}`}>
-                  <Link className="nav-link" to ={'/dashboard/table_view'}>
-                    Table
+                <Nav.Link
+                  onClick={() => {
+                    dispatch(changeTableTab());
+                    dispatch(clearSelectedData());
+                  }}
+                  className={`${
+                    tableTab
+                      ? styles[`${shop}_navbar_offcanvas_body_active`]
+                      : ""
+                  } ${styles[`${shop}_navbar_offcanvas_body_nav`]}`}
+                >
+                  <Link className="nav-link" to={"/dashboard/table_view"}>
+                    Table View
                   </Link>
                 </Nav.Link>
-                <Nav.Link onClick={()=>{dispatch(changeVisualizationTab())}} className={`${visualizationTab?styles[`${shop}_navbar_offcanvas_body_active`]:''} ${styles[`${shop}_navbar_offcanvas_body_nav`]}`}>
-                  <Link className="nav-link" to ={'/dashboard/visualization_view'}>
+                {/* <Nav.Link
+                  onClick={() => {
+                    dispatch(changeVisualizationTab());
+                  }}
+                  className={`${
+                    visualizationTab
+                      ? styles[`${shop}_navbar_offcanvas_body_active`]
+                      : ""
+                  } ${styles[`${shop}_navbar_offcanvas_body_nav`]}`}
+                >
+                  <Link
+                    className="nav-link"
+                    to={"/dashboard/visualization_view"}
+                  >
                     Visualization
                   </Link>
-                </Nav.Link>
+                </Nav.Link> */}
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

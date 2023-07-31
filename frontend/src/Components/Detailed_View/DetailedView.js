@@ -1,35 +1,53 @@
-import React from 'react'
-import Datepicker from '../Datepicker';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createDatesArray } from "../../app/dataReducer";
+import { changeDetailedTab } from "../../app/uiReducer";
+import FiltersTab from "../FiltersTab";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import CardGroup from "./CardGroup";
+import DataEntry from "./DataEntry";
+import ToastMessage from "../Toast";
+import styles from "./../../Styles/detailedview.module.css";
+import Sidebar from "../Offcanvas";
 
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import CardGroup from './CardGroup';
-import InventoryForm from './InventoryForm';
-import styles from './../../Styles/detailedview.module.css'
 function DetailedView() {
-  const shop = 'Panera';
+  const dispatch = useDispatch();
+  const dates = useSelector((state) => state.dataReducer.dates);
+  useEffect(() => {
+    fetchDatesOnDetailedViewLoad();
+    dispatch(changeDetailedTab());
+  }, []);
+
+  const fetchDatesOnDetailedViewLoad = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/get_distinct_dates");
+      const dates = await response.json();
+      dispatch(createDatesArray(dates));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const shop = "Panera";
   return (
-    <Container fluid className={styles[`${shop}_detailed_view_container`]}>
-      <Row>
-        <Col xs={12} md={{span:8}}>
-          <div className = {`${styles[`${shop}_detailed_view_title`]}`}>Detailed View</div>
-        </Col>
-        <Col className = {`${styles[`${shop}_detailed_view_date_container`]}`}>
-        <Datepicker/>
-        </Col>
-      </Row>
-        
-      <Row >
-        <Col xs={6} md={6} lg={6} xl={5}>
-          <CardGroup/>
-        </Col>
-        <Col>
-          <InventoryForm/>
-        </Col>
-      </Row>
-    </Container>
-  )
+    <React.Fragment>
+      <Sidebar />
+      <Container fluid className={styles[`${shop}_detailed_view_container`]}>
+        <ToastMessage />
+        <FiltersTab />
+        <Row>
+          <Col xs={6} md={6} lg={6} xl={5}>
+            <CardGroup />
+          </Col>
+          <Col>
+            <DataEntry />
+          </Col>
+        </Row>
+      </Container>
+    </React.Fragment>
+  );
 }
 
-export default DetailedView
+export default DetailedView;

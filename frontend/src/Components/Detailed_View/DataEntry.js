@@ -1,0 +1,26 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import InventoryForm from "./InventoryForm";
+import DataEntryFiller from "./DataEntryFiller";
+function DataEntry() {
+  const selectedLocation = useSelector(
+    (state) => state.dataReducer.selectedLocation
+  );
+  const selectedDate = useSelector((state) => state.dataReducer.selectedDate);
+  const selectedData = useSelector((state) => state.dataReducer.selectedData);
+  return (
+    <>
+      {selectedLocation && selectedDate && selectedData? (
+        <InventoryForm />
+      ) : (
+        <DataEntryFiller
+          selectedLocation={selectedLocation}
+          selectedDate={selectedDate}
+          selectedData = {selectedData}
+        />
+      )}
+    </>
+  );
+}
+
+export default DataEntry;
