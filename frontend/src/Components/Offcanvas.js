@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useSelector, useDispatch } from "react-redux";
+import Logout from "./Logout";
 import {
   changeDetailedTab,
   changeTableTab,
@@ -17,6 +18,9 @@ function Sidebar() {
   const shop = "Panera"; // should come as a prop
   const detailedTab = useSelector((state) => state.uiReducer.detailedTab);
   const tableTab = useSelector((state) => state.uiReducer.tableTab);
+
+  const userDetails = useSelector((state)=>state.dataReducer.userDetails)
+  console.log("USERDETAILS:" ,userDetails)
   const visualizationTab = useSelector(
     (state) => state.uiReducer.visualizationTab
   );
@@ -63,11 +67,11 @@ function Sidebar() {
                 ></img>
               </Navbar.Brand>
             </Offcanvas.Header>
-            <Offcanvas.Body>
-              <Nav
-                className={`flex-grow-1 pe-3 ${
+            <Offcanvas.Body className={`flex-grow-1 pe-3 ${
                   styles[`${shop}_navbar_offcanvas_body`]
-                }`}
+                }`}>
+              <Nav
+                
               >
                 <Nav.Link
                   onClick={() => {
@@ -116,6 +120,12 @@ function Sidebar() {
                     Visualization
                   </Link>
                 </Nav.Link> */}
+              </Nav>
+              <Nav className={`flex-grow-1 pe-3 ${
+                  styles[`${shop}_offcanvas_logout_container`]
+                }`}>
+                  <div className={`${styles[`${shop}_username`]}`}>Hi! {userDetails["user_name"]}</div>
+                <Logout/>
               </Nav>
             </Offcanvas.Body>
           </Navbar.Offcanvas>

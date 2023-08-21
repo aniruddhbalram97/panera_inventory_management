@@ -16,7 +16,7 @@ const onDownload = props.onDownload;
     <Row className={`${styles[`${shop}_common_title_row`]}`}>
       <Col xs={12} md={{ span: 4 }}>
         <div className={`${styles[`${shop}_common_title`]}`}>
-          {detailedTab? "DATA ENTRY":tableTab?"TABLE VIEW":"VISUALIZATION"}
+          {detailedTab? "DATA ENTRY":tableTab?"REPORT":"VISUALIZATION"}
         </div>
       </Col>
       <Col className={`${styles[`${shop}_common_date_container`]}`}>

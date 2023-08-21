@@ -1,18 +1,25 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { updateToastMessage } from "../app/dataReducer";
+import { setInfoMessage } from "../app/uiReducer";
 import styles from "./../Styles/common.module.css";
 import Toast from "react-bootstrap/Toast";
 function ToastMessage() {
   const dispatch = useDispatch();
   const shop = "Panera";
   const toastMessage = useSelector((state) => state.dataReducer.toastMessage);
+  const infoMessage = useSelector((state)=>state.uiReducer.infoMessage)
   const closeToast = () => {
     dispatch(updateToastMessage(""));
+    dispatch(setInfoMessage(""))
   };
   useEffect(() => {
-    console.log("TOAST MESSAGE: ", toastMessage);
   }, [toastMessage]);
+
+  useEffect(()=>{
+    if(infoMessage)
+      dispatch(updateToastMessage(infoMessage))
+  },[infoMessage])
   if (toastMessage)
     return (
       <Toast

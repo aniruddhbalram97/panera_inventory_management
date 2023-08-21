@@ -6,6 +6,8 @@ export const uiReducer = createSlice({
     detailedTab:false,
     tableTab:false,
     visualizationTab:false,
+    auth:"login",
+    infoMessage:false,
   },
   reducers: {
     changeDetailedTab: (state) => {
@@ -23,10 +25,23 @@ export const uiReducer = createSlice({
         state.tableTab = false;
         state.visualizationTab = true;
     },
+    toggleAuth:(state,action) =>{
+      state.auth = action.payload 
+    },
+    setInfoMessage:(state, action) =>{
+      state.infoMessage = action.payload
+    },
+    resetUiState:(state,action) =>{
+      state.detailedTab=false
+      state.tableTab=false
+      state.visualizationTab=false
+      state.auth="register"
+      state.infoMessage=false
+    }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {changeDetailedTab, changeTableTab, changeVisualizationTab} = uiReducer.actions
+export const {changeDetailedTab, changeTableTab, changeVisualizationTab, toggleAuth, setInfoMessage, resetUiState} = uiReducer.actions
 
 export default uiReducer.reducer

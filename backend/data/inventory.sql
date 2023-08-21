@@ -92,3 +92,13 @@ UPDATE INVENTORY_MASTER_TIMELY
         updated_date = NOW()
         WHERE INVENTORY_ID = ${inventory_id} AND CREATED_DATE = ${date};
 
+'FOR AUTHENTICATION:'
+CREATE TABLE USERS (
+    user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_name VARCHAR(255) NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
+    user_password VARCHAR(255) NOT NULL,
+    supervisor VARCHAR(255) NOT NULL,
+    store_name VARCHAR(255) NOT NULL,
+    store_id VARCHAR(255) NOT NULL
+);

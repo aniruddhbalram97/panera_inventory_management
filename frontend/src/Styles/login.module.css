@@ -4,22 +4,44 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(#f6bf26, #ffd427);
-    /* background: repeating-linear-gradient(
-        90deg,
-        #e2163d,
-        #e2163d calc(100vw / 7),
-        #8e24aa calc(100vw / 7),
-        #8e24aa calc(200vw / 7),
-        #e67c73 calc(200vw / 7),
-        #e67c73 calc(300vw / 7),
-        #3f51b5 calc(300vw / 7),
-        #3f51b5 calc(400vw / 7),
-        #0b8043 calc(400vw / 7),
-        #0b8043 calc(500vw / 7),
-        #f4511e calc(500vw / 7),
-        #f4511e calc(600vw / 7),
-        rgb(87, 108, 29) calc(600vw / 7),
-        rgb(87, 108, 29) calc(700vw / 7)
-      ); */
+    background: #fff;
+}
+.login-container-row {
+  min-width:350px;
+}
+.login-title{
+  color: #e21833;
+  font-family: Roboto;
+  Font-size:3rem;
+  font-weight:600;
+}
+
+.login-label {
+  color: #000;
+  font-family:Roboto;
+  font-size:1rem;
+  margin-bottom:0.25rem!important;
+}
+.login-button {
+  background-color: rgb(226, 24, 51);
+  color:#fff;
+  font-family:Roboto;
+  font-size:1rem;
+  border:none
+}
+.login-button:hover, .login-button:active, .login-button:focus-visible,.login-button:focus, .login-button:disabled {
+  background-color:rgba(226,24,51,0.7)!important;
+}
+
+.login-toggle {
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+.login-info-success {
+color:rgb(12, 139, 12);
+}
+
+.login-info-error {
+  color: rgb(226, 24, 51);
 }

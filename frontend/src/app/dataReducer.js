@@ -28,7 +28,9 @@ export const dataReducer = createSlice({
     selectedData: null,
     selectedDate: null,
     instruction: "PLEASE SELECT A DATE",
-    toastMessage: ""
+    toastMessage: "",
+    isAuthenticated: false,
+    userDetails:false,
   },
   reducers: {
     changeDetailedDate: (state, action) => {
@@ -124,8 +126,41 @@ export const dataReducer = createSlice({
     updateToastMessage:(state,action) => {
       state.toastMessage = action.payload
       console.log("dataReducer: ",state.toastMessage);
-    }
-
+    },
+    setIsAuthenticated:(state, action) =>{
+      state.isAuthenticated = action.payload
+    },
+    setUserDetails:(state, action) =>{
+      state.userDetails = action.payload
+    },
+    resetDataState:(state,action)=>{
+      state.openOrders= ''
+      state.onHand= ''
+      state.order_=''
+      state.adjustedOrder=''
+      state.adjustedPar= ''
+      state.case_= ''
+      state.lbs= ''
+      state.bag= ''
+      state.tray= ''
+      state.ea= ''
+      state.oz= ''
+      state.gal= ''
+      state.sleeves= ''
+      state.totalCases= ''
+      state.sales=''
+      state.yield=''
+      state.dates= null
+      state.requestedData= null
+      state.requestedLocations= null
+      state.selectedLocation=null
+      state.selectedData= null
+      state.selectedDate= null
+      state.instruction= "PLEASE SELECT A DATE"
+      state.toastMessage= ""
+      state.isAuthenticated= false
+      state.userDetails=false
+    },
   },
 });
 
@@ -156,7 +191,10 @@ export const {
   refetchUpdatedData,
   setSelectedData,
   updateToastMessage,
-  clearSelectedData
+  clearSelectedData,
+  setIsAuthenticated,
+  setUserDetails,
+  resetDataState
 } = dataReducer.actions;
 
 

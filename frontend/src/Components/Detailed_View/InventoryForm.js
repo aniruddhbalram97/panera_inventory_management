@@ -13,7 +13,6 @@ import {
   setEa,
   setGal,
   setLbs,
-  setOnHand,
   setOpenOrders,
   setOz,
   setSleeves,
@@ -36,7 +35,6 @@ function InventoryForm() {
   );
   const selectedDate = useSelector((state) => state.dataReducer.selectedDate);
   const openOrders = useSelector((state) => state.dataReducer.openOrders);
-  const onHand = useSelector((state) => state.dataReducer.onHand);
   const adjustedPar = useSelector((state) => state.dataReducer.adjustedPar);
   const case_ = useSelector((state) => state.dataReducer.case_);
   const lbs = useSelector((state) => state.dataReducer.lbs);
@@ -52,7 +50,7 @@ function InventoryForm() {
   const selectedData = useSelector((state) => state.dataReducer.selectedData);
   const dispatch = useDispatch();
   const unlock = selectedData.unlock.split("-");
-  console.log(unlock);
+  console.log("UNLOCK: ", unlock);
   // For live calculations of adjusted order and order
   useEffect(() => {
     if (selectedData) {
@@ -77,18 +75,18 @@ function InventoryForm() {
       if (selectedData.order_) {
         _order_ = selectedData.order_;
       } else if (selectedData.system_par) {
-        if (selectedData.on_hand)
-          _order_ = selectedData.system_par - selectedData.on_hand;
-        else if (onHand) _order_ = selectedData.system_par - onHand;
+        if (selectedData.total_case)
+          _order_ = selectedData.system_par - selectedData.total_case;
+        else if (totalCases) _order_ = selectedData.system_par - totalCases;
         else {
           _order_ = selectedData.system_par;
         }
       } else {
         _order_ = 0;
       }
-      if (onHand) {
+      if (totalCases) {
         if (selectedData.system_par) {
-          _order_ = selectedData.system_par - onHand;
+          _order_ = selectedData.system_par - totalCases;
         }
       }
 
@@ -97,11 +95,13 @@ function InventoryForm() {
       if (selectedData._adjusted_order_) {
         _adjusted_order_ = selectedData._adjusted_order_;
       } else if (selectedData.adjusted_par) {
-        if (selectedData.on_hand)
-          _adjusted_order_ = selectedData.adjusted_par - selectedData.on_hand;
-        else if (adjustedPar)
-          _adjusted_order_ = adjustedPar - selectedData.on_hand;
-        else if (adjustedPar && onHand) _adjusted_order_ = adjustedPar - onHand;
+        if (selectedData.total_case)
+          _adjusted_order_ =
+            selectedData.adjusted_par - selectedData.total_case;
+        else if (selectedData.total_case && adjustedPar)
+          _adjusted_order_ = adjustedPar - selectedData.total_case;
+        else if (adjustedPar && totalCases)
+          _adjusted_order_ = adjustedPar - totalCases;
         else {
           _adjusted_order_ = selectedData.adjusted_par;
         }
@@ -109,24 +109,24 @@ function InventoryForm() {
         _adjusted_order_ = 0;
       }
       if (adjustedPar) {
-        if (selectedData.on_hand) {
-          _adjusted_order_ = adjustedPar - selectedData.on_hand;
+        if (selectedData.total_case) {
+          _adjusted_order_ = adjustedPar - selectedData.total_case;
           console.log("adjusted_order", _adjusted_order_);
         }
       }
-      if (onHand) {
-        _adjusted_order_ = -onHand;
+      if (totalCases) {
+        _adjusted_order_ = -totalCases;
         if (selectedData.adjusted_par) {
-          _adjusted_order_ = selectedData.adjusted_par - onHand;
+          _adjusted_order_ = selectedData.adjusted_par - totalCases;
         }
         if (adjustedPar) {
-          _adjusted_order_ = adjustedPar - onHand;
+          _adjusted_order_ = adjustedPar - totalCases;
         }
       }
       dispatch(setOrder(_order_));
       dispatch(setAdjustedOrder(_adjusted_order_));
     }
-  }, [onHand, adjustedPar, order_]);
+  }, [totalCases, adjustedPar, order_]);
 
   // For live calculations of total cases
   useEffect(() => {
@@ -170,7 +170,6 @@ function InventoryForm() {
       dispatch(setEa(""));
       dispatch(setGal(""));
       dispatch(setLbs(""));
-      dispatch(setOnHand(""));
       dispatch(setOpenOrders(""));
       dispatch(setOz(""));
       dispatch(setSleeves(""));
@@ -204,7 +203,6 @@ function InventoryForm() {
     let sleeves_ = sleeves == "" ? selectedData.sleeves : sleeves;
     let adjusted_par = adjustedPar ? adjustedPar : selectedData.adjusted_par;
     let open_orders = openOrders ? openOrders : selectedData.open_orders;
-    let on_hand = onHand ? onHand : selectedData.on_hand;
     let sales_ = sales ? sales : selectedData.sales;
     let _yield_ = yield_ ? yield_ : selectedData.yield;
     let adjusted_order = adjusted_order_
@@ -228,7 +226,6 @@ function InventoryForm() {
             oz: oz_,
             adjusted_par: adjusted_par,
             ea: ea_,
-            on_hand: on_hand,
             open_orders: open_orders,
             order_: order_,
             adjusted_order: adjusted_order,
@@ -701,81 +698,6 @@ function InventoryForm() {
                   }`}
                 >
                   <Col
-                    xl={6}
-                    md={6}
-                    className={`${
-                      styles[`${shop}_detailed_view_inventory_form_label`]
-                    }`}
-                  >
-                    ORDER
-                  </Col>
-                  <Col
-                    xl={6}
-                    md={6}
-                    className={`${
-                      styles[`${shop}_detailed_view_inventory_form_input_col`]
-                    }`}
-                  >
-                    <Form.Control
-                      name={"ORDER"}
-                      value={order_}
-                      className={`${
-                        styles[`${shop}_detailed_view_inventory_form_input`]
-                      }`}
-                      disabled
-                    ></Form.Control>
-                  </Col>
-                </Row>
-                <Row
-                  className={`${
-                    styles[`${shop}_detailed_view_inventory_form_row`]
-                  }`}
-                >
-                  <Col
-                    xl={6}
-                    md={6}
-                    className={`${
-                      styles[`${shop}_detailed_view_inventory_form_label`]
-                    }`}
-                  >
-                    ADJUSTED ORDER
-                  </Col>
-                  <Col
-                    xl={6}
-                    md={6}
-                    className={`${
-                      styles[`${shop}_detailed_view_inventory_form_input_col`]
-                    }`}
-                  >
-                    <Form.Control
-                      name={"ADJUSTED_ORDER"}
-                      value={adjusted_order_}
-                      className={`${
-                        styles[`${shop}_detailed_view_inventory_form_input`]
-                      }`}
-                      disabled
-                    ></Form.Control>
-                  </Col>
-                </Row>
-                <Row
-                  className={`${
-                    styles[`${shop}_detailed_view_inventory_form_row`]
-                  }`}
-                >
-                  <div
-                    className={`${
-                      styles[
-                        `${shop}_detailed_view_inventory_form_horizontal_line`
-                      ]
-                    }`}
-                  ></div>
-                </Row>
-                <Row
-                  className={`${
-                    styles[`${shop}_detailed_view_inventory_form_row`]
-                  }`}
-                >
-                  <Col
                     xl={12}
                     md={12}
                     style={{ justifyContent: "center" }}
@@ -1086,15 +1008,6 @@ function InventoryForm() {
                   <Col
                     xl={4}
                     md={6}
-                    disabled={
-                      unlock
-                        ? unlock[0] == "N/A"
-                          ? false
-                          : unlock.find((element) => element == "SLEEVE")
-                          ? false
-                          : true
-                        : false
-                    }
                     className={`${
                       styles[`${shop}_detailed_view_inventory_form_input_col`]
                     }`}
@@ -1107,6 +1020,15 @@ function InventoryForm() {
                         styles[`${shop}_detailed_view_inventory_form_input`]
                       }`}
                       pattern="^[0-9]*$"
+                      disabled={
+                        unlock
+                          ? unlock[0] == "N/A"
+                            ? false
+                            : unlock.find((element) => element == "SLEEVE")
+                            ? false
+                            : true
+                          : false
+                      }
                       onChange={(e) => {
                         if (!e.target.validity.patternMismatch) {
                           dispatch(setSleeves(e.target.value));
@@ -1147,9 +1069,113 @@ function InventoryForm() {
                     ></Form.Control>
                   </Col>
                 </Row>
+                <Row
+                  className={`${
+                    styles[`${shop}_detailed_view_inventory_form_row`]
+                  }`}
+                >
+                  <Col
+                    xl={6}
+                    md={6}
+                    className={`${
+                      styles[`${shop}_detailed_view_inventory_form_label`]
+                    }`}
+                  >
+                    CALCULATED ON-HAND EA
+                  </Col>
+                  <Col
+                    xl={6}
+                    md={6}
+                    className={`${
+                      styles[`${shop}_detailed_view_inventory_form_input_col`]
+                    }`}
+                  >
+                    <Form.Control
+                      name={"TOTAL_CASES"}
+                      placeholder={"Calculated Total Cases"}
+                      value={totalCases ? totalCases : selectedData.total_case}
+                      className={`${
+                        styles[`${shop}_detailed_view_inventory_form_input`]
+                      }`}
+                      disabled
+                    ></Form.Control>
+                  </Col>
+                </Row>
               </Col>
             </Row>
-
+            <Row
+              className={`${
+                styles[`${shop}_detailed_view_inventory_form_row`]
+              }`}
+            >
+              <div
+                className={`${
+                  styles[`${shop}_detailed_view_inventory_form_horizontal_line`]
+                }`}
+              ></div>
+            </Row>
+            <Row
+              className={`${
+                styles[`${shop}_detailed_view_inventory_form_row`]
+              }`}
+            >
+              <Col
+                xl={6}
+                md={6}
+                className={`${
+                  styles[`${shop}_detailed_view_inventory_form_label`]
+                }`}
+              >
+                ORDER
+              </Col>
+              <Col
+                xl={6}
+                md={6}
+                className={`${
+                  styles[`${shop}_detailed_view_inventory_form_input_col`]
+                }`}
+              >
+                <Form.Control
+                  name={"ORDER"}
+                  value={order_}
+                  className={`${
+                    styles[`${shop}_detailed_view_inventory_form_input`]
+                  }`}
+                  disabled
+                ></Form.Control>
+              </Col>
+            </Row>
+            <Row
+              className={`${
+                styles[`${shop}_detailed_view_inventory_form_row`]
+              }`}
+            >
+              <Col
+                xl={6}
+                md={6}
+                className={`${
+                  styles[`${shop}_detailed_view_inventory_form_label`]
+                }`}
+              >
+                ADJUSTED ORDER
+              </Col>
+              <Col
+                xl={6}
+                md={6}
+                className={`${
+                  styles[`${shop}_detailed_view_inventory_form_input_col`]
+                }`}
+              >
+                <Form.Control
+                  name={"ADJUSTED_ORDER"}
+                  value={adjusted_order_}
+                  className={`${
+                    styles[`${shop}_detailed_view_inventory_form_input`]
+                  }`}
+                  disabled
+                ></Form.Control>
+              </Col>
+            </Row>
             <Row style={{ paddingTop: 1.75 }}>
               <div
                 className={`${

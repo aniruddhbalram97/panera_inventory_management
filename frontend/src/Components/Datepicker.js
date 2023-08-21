@@ -7,7 +7,6 @@ import {
   setInstructions,
   clearSelectedData
 } from "../app/dataReducer";
-// import styles from './../Styles/detailedview.module.css'
 import "./../Styles/datepicker.css";
 
 function Datepicker() {

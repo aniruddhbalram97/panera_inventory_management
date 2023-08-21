@@ -1,18 +1,34 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
+import {useSelector, useDispatch} from 'react-redux';
+
 import Signin from "./Signin";
+import Registration from "./Registration";
+import ToastMessage from "../Toast";
+
+import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+
 import styles from "./../../Styles/login.module.css";
+const AuthForm = () => {
+  const auth = useSelector((state)=>state.uiReducer.auth);
+  if(auth == 'login') {
+    return <Signin/>
+  }
+  else {
+    return <Registration/>
+  }
+}
 function LoginContainer() {
   return (
     <Container className={`${styles["login-container"]}`} fluid={true}>
+      <ToastMessage/>
       <Row style={{justifyContent:'center'}}>
-        <img style={{maxHeight:100}}src={require("./../images/Login_Logo.gif")}></img>
+        <p className={`${styles["login-title"]}`}>FOODCOURT INVENTORY</p>
       </Row>
-      <Row>
+      <Row className={`${styles["login-container-row"]}`}>
         <Col>
-          <Signin />
+         <AuthForm/>
         </Col>
       </Row>
     </Container>

@@ -436,3 +436,27 @@ button:focus:not(focus-visible) {
     margin-top: 20px;
     justify-content:center;
 }
+
+.Panera_detailed_view_add_button {
+    height:35px;
+    width:35px;
+    display:flex;
+    position:fixed;
+    bottom:25px;
+    left:25px;
+    border-radius:17.5px;
+    background-color: var(--panera_brown);
+    border:unset;
+    justify-content: center;
+    align-items:center;
+    font-size:20px;
+}
+
+.Panera_detailed_view_add_button_icon {
+    color: var(--panera_yellow);
+    stroke-width:1.5px;
+}
+
+.Panera_detailed_view_add_button:hover,.Panera_detailed_view_add_button:active,.Panera_detailed_view_add_button:focus {
+    background-color: rgb(48, 9, 0,0.8)
+}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createDatesArray } from "../../app/dataReducer";
+import { createDatesArray, setUserDetails } from "../../app/dataReducer";
 import { changeDetailedTab } from "../../app/uiReducer";
 import FiltersTab from "../FiltersTab";
 import Container from "react-bootstrap/Container";
@@ -11,6 +11,7 @@ import DataEntry from "./DataEntry";
 import ToastMessage from "../Toast";
 import styles from "./../../Styles/detailedview.module.css";
 import Sidebar from "../Offcanvas";
+import AddData from "./AddData";
 
 function DetailedView() {
   const dispatch = useDispatch();
@@ -31,8 +32,28 @@ function DetailedView() {
   };
 
   const shop = "Panera";
+
+  const getName = async ()=>{
+    try {
+      const res = await fetch("http://localhost:5000/auth/get_name", {
+        method: "GET",
+        headers: { jwt_token: localStorage.token }
+      });
+
+      const parseData = await res.json();
+      console.log(parseData);
+      dispatch(setUserDetails(parseData));
+    } catch (err) {
+      console.error(err.message);
+    }
+  }
+
+  useEffect(()=>{
+    getName()
+  },[])
   return (
     <React.Fragment>
+      <AddData/>
       <Sidebar />
       <Container fluid className={styles[`${shop}_detailed_view_container`]}>
         <ToastMessage />
